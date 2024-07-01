@@ -48,6 +48,7 @@ router.post("/login", async (req, res) => {
     return res.json({ message: "Username or Password is Incorrect!" });
   }
 
+  // A token is a means by which the server/API can verify the person making requests is the same person who was logged-in initially
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   res.json({ token, userID: user._id });
 });
