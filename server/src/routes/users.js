@@ -1,7 +1,11 @@
-import express from "express";
-import jwt from "jsonwebtoken";
+import express from "express"; //Node backend framework used for writing API
+import jwt from "jsonwebtoken"; //Used for creating the tokens for user sessions when logged-in
 import bcrypt from "bcrypt"; //Used for hashing passwords
-import { UserModel } from "../models/Users.js";
+import { UserModel } from "../models/Users.js"; // Uses this model setup as the form for async functions
+import dotenv from "dotenv";
+import { resolve } from "path";
+
+dotenv.config({ path: resolve("../../.env") });
 
 const router = express.Router();
 
@@ -30,6 +34,22 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {});
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await UserModel.findOne({ username });
+
+  if (!user) {
+    return res.json({ message: "User Doesn't Exist!" });
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    return res.json({ message: "Username or Password is Incorrect!" });
+  }
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  res.json({ token, userID: user._id });
+});
 
 export { router as userRouter };
