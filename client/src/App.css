@@ -72,15 +72,16 @@ body {
 
 .auth-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column; /* Stack items vertically */
   padding: 20px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   margin: 20px;
-  width: 400px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 400px; /* Max width for smaller screens */
 }
 
 .form-group {
@@ -98,6 +99,22 @@ input {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
+  width: 100%; /* Ensure inputs take full width */
+  max-width: 100%; /* Ensure inputs do not exceed container width */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .auth-container {
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 10px; /* Adjust padding for compactness */
+  }
+
+  .auth-container form {
+    width: 100%; /* Full width for forms */
+    margin-bottom: 20px; /* Space between forms */
+  }
 }
 
 /* Create Recipe page styles */
