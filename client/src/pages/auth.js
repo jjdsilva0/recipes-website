@@ -15,8 +15,8 @@ export const Auth = () => {
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [, setCookies] = useCookies(["access_token"]);
-  const navigate = useNavigate();
+  const [, setCookies] = useCookies(["access_token"]); // Come back to see how the whole cookies and useCookies works
+  const navigate = useNavigate(); // Figure out how this works and alternates
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -26,18 +26,21 @@ const Login = () => {
         password,
       });
 
-      // If login is successful, set cookies and navigate to home
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userID", response.data.userID);
-      navigate("/");
-    } catch (err) {
-      // Handle error state here
-      if (err.response && err.response.data && err.response.data.message) {
-        alert(err.response.data.message); // Display error message to the user
+      // Check if the response contains the token and userID
+      if (response.data.token && response.data.userID) {
+        setCookies("access_token", response.data.token);
+        window.localStorage.setItem("userID", response.data.userID);
+        navigate("/");
       } else {
-        alert("Login failed. Please try again."); // Default error message
+        // Display the error message from the backend
+        alert(response.data.message);
+        // Clear input fields after displaying error message
+        setUsername("");
+        setPassword("");
       }
-      // Clear input fields after displaying error message
+    } catch (err) {
+      console.error(err);
+      alert("Login failed. Please try again.");
       setUsername("");
       setPassword("");
     }
