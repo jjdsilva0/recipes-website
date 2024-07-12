@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { resolve } from "path";
 
 import { userRouter } from "./routes/users.js";
+import { recipesRouter } from "./routes/recipes_list.js";
 
 // Load environment variables from .env file located in the project root
 dotenv.config({ path: resolve("../.env") });
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", userRouter);
+app.use("/recipes_list", recipesRouter);
 
 mongoose.connect(process.env.MYACCOUNT_CONNECTION);
 
