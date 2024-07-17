@@ -1,4 +1,46 @@
 /* Global styles */
+.home-container {
+  padding-top: 100px; /* Add padding to push content below the navbar */
+}
+
+.saved-recipes-container {
+  padding-top: 100px;
+}
+
+.page-title {
+  margin-bottom: 20px; /* Add space between the title and the content */
+  text-align: center; /* Center the title */
+}
+
+.text-size {
+  font-size: 14px;
+}
+
+/* Use bullet points for ingredients */
+.ingredient-list {
+  list-style-type: disc; /* Use disc bullets */
+  margin-top: 5px; /* Add margin above the bullet list */
+  margin-bottom: 10px; /* Add margin below the bullet list */
+  padding-left: 20px; /* Indent bullets */
+}
+
+/* Style for each recipe item */
+.recipe-item {
+  border: 1px solid #ccc; /* Add border around each recipe item */
+  padding: 15px; /* Add padding inside each recipe item */
+  margin-bottom: 20px; /* Add margin below each recipe item */
+}
+
+.recipe-item img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.recipe-item h2 {
+  margin-top: 0;
+}
+
 body {
   margin: 0;
   padding: 0;

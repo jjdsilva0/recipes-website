@@ -54,3 +54,15 @@ router.post("/login", async (req, res) => {
 });
 
 export { router as userRouter };
+
+export const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, (err) => {
+      if (err) return res.sendStatus(403);
+      next(); // if no errors are present, then allow the user to continue to their request
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};

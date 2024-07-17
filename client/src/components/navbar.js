@@ -57,10 +57,6 @@ export const Navbar = () => {
         <FontAwesomeIcon icon={faFeather} className="icon" />
         <span className="label">Create Recipe</span>
       </Link>
-      <Link to="/saved-recipes" className="nav-link">
-        <FontAwesomeIcon icon={faFloppyDisk} className="icon" />
-        <span className="label">Saved Recipes</span>
-      </Link>
       {!cookies.access_token ? (
         <Link to="/auth" className="nav-link" style={navLinkStyle}>
           <FontAwesomeIcon
@@ -71,14 +67,20 @@ export const Navbar = () => {
           <span className="label">Login/Register</span>
         </Link>
       ) : (
-        <button onClick={logout} style={logoutButtonStyle}>
-          <FontAwesomeIcon
-            icon={faRightToBracket}
-            className="icon"
-            style={iconStyle}
-          />
-          <span className="label">Logout</span>
-        </button>
+        <>
+          <Link to="/saved-recipes" className="nav-link">
+            <FontAwesomeIcon icon={faFloppyDisk} className="icon" />
+            <span className="label">Saved Recipes</span>
+          </Link>
+          <button onClick={logout} style={logoutButtonStyle}>
+            <FontAwesomeIcon
+              icon={faRightToBracket}
+              className="icon"
+              style={iconStyle}
+            />
+            <span className="label">Logout</span>
+          </button>
+        </>
       )}
     </div>
   );
